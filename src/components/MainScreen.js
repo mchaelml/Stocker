@@ -237,9 +237,7 @@ class MainScreen extends React.Component {
           iconToUse: <FaFrown color="red" size="80px" />,
           text1: `К сожалению ваша ставка проиграла`,
           text2: `Сумма проигрыша по обновленному курсу`,
-          bet:
-            (this.state.bet.betAmount - NewAmountBTCReturnedAfterStockUpdate) *
-            -1
+          bet: this.state.bet.betAmount - NewAmountBTCReturnedAfterStockUpdate
         }
       });
       this.props.changeUserBTC(
