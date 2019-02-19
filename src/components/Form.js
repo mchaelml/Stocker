@@ -100,6 +100,9 @@ const UpArrow = styled(MdArrowUpward)``;
 const DownArrow = styled(MdArrowDownward)``;
 
 class BForm extends React.Component {
+  constructor(props) {
+    super(props)
+  }
   renderInput = ({ input, label, meta, mode, disabled }) => {
     return (
       <React.Fragment>
@@ -116,20 +119,6 @@ class BForm extends React.Component {
           <Column>
             <Label>{label}</Label>
             <Input>
-              {/* <Select {...input}>
-                {Object.values(this.props.currencies).map((currency, i) => {
-                  return (
-                    <option
-                      key={currency.symbol}
-                      value={currency.code}
-                      disabled={disabled}
-                    >
-                      {ReactHtmlParser(currency.symbol)}
-                      {currency.code}
-                    </option>
-                  );
-                })}
-              </Select> */}
               <DropdownStyled
                 {...input}
                 disabled={disabled}
@@ -201,7 +190,6 @@ class BForm extends React.Component {
   onSubmit = vals => this.props.onSubmitForms(vals);
 
   render() {
-    console.log(this.props);
     this.props.submitRef(this.props.handleSubmit(this.onSubmit));
     return (
       <React.Fragment>
@@ -219,7 +207,6 @@ class BForm extends React.Component {
               />
               <Field
                 name="sum"
-                //parse={value => Number(value)}
                 component={this.renderInput}
                 label="Сумма"
                 mode="input"

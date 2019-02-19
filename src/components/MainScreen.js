@@ -188,14 +188,11 @@ class MainScreen extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    // console.log(this.props.data);
-    // console.log(nextProps.data.bpi);
     if (
       this.props.data !== undefined &&
       this.props.data.bpi !== nextProps.data.bpi &&
       this.state.waitForResults
     ) {
-      console.log("data has changed");
       this.winOrLose(nextProps);
       this.setState({
         waitForResults: false,
@@ -210,8 +207,6 @@ class MainScreen extends React.Component {
   }
 
   winOrLose(newData) {
-    console.log(this.state.bet.value);
-    console.log(newData.data.bpi[this.state.bet.currency].rate_float);
     const NewAmountBTCReturnedAfterStockUpdate = this.calculateReturnBetAmount(
       this.state.bet.value,
       newData.data.bpi[this.state.bet.currency].rate_float,
@@ -258,14 +253,13 @@ class MainScreen extends React.Component {
   onSubmitForm = props => this.submit(props);
 
   onSubmitForms = props => {
-    console.log(props);
+    const currency = props.currency.label.props.children[2]
     this.setState({
       waitForResults: true,
       isFormDisabled: true,
       bet: {
-        currency: props.currency.label.props.children[2],
-        value: this.props.data.bpi[props.currency.label.props.children[2]]
-          .rate_float,
+        currency: currency,
+        value: this.props.data.bpi[currency].rate_float,
         betAmount: Number(props.sum)
       },
       data: this.props.data
@@ -305,7 +299,6 @@ class MainScreen extends React.Component {
                 <MainForm>
                   {this.state.waitForResults && <Spinner />}
                   <Sections>
-                    {/* <Modal /> */}
                     <LeftSection>
                       <UserForm
                         submitRef={submit => (this.submit = submit)}
@@ -322,9 +315,6 @@ class MainScreen extends React.Component {
                   </Sections>
                 </MainForm>
                 <ActionButtonSection>
-                  {/* <ActionButton width="5%" borderRight="1px solid black">
-                    <FaCheck size="1em" />
-                  </ActionButton> */}
                   <ActionButton
                     onClick={this.onSubmitForm}
                     disabled={this.state.isFormDisabled}
@@ -340,14 +330,6 @@ class MainScreen extends React.Component {
 
                     <ButtonText>СДЕЛАТЬ СТАВКУ</ButtonText>
                   </ActionButton>
-                  {/* <ActionButton borderRight="1px solid black">
-                    <div>
-                      <div style={{ borderRight: "1px solid black" }}>
-                        <FaCheck size="1em" />
-                      </div>
-                      СДЕЛАТЬ СТАВКУ
-                    </div>
-                  </ActionButton> */}
                 </ActionButtonSection>
               </React.Fragment>
             )}
