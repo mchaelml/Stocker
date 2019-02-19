@@ -13,6 +13,7 @@ const Inline = styled.div`
   justify-content: ${props => props.justifyContent || "space-between"};
   padding: ${props => `${props.padding} 0`};
   ${props => (props.fontSize ? `font-size: ${props.fontSize}px` : null)}
+  ${props => (props.rules ? `align-items: ${props.rules}` : null)}
 `;
 
 const Column = styled.div`
@@ -101,7 +102,7 @@ const DownArrow = styled(MdArrowDownward)``;
 
 class BForm extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
   }
   renderInput = ({ input, label, meta, mode, disabled }) => {
     return (
@@ -173,7 +174,7 @@ class BForm extends React.Component {
   renderRules = ({ meta, input, label, disabled }) => {
     return (
       <React.Fragment>
-        <Inline>
+        <Inline rules="flex-end">
           <input
             type="checkbox"
             name="acceptRules"
@@ -181,7 +182,7 @@ class BForm extends React.Component {
             {...input}
             disabled={disabled}
           />
-          <label>{label}</label>
+          <label style={{ paddingLeft: 5 }}>{label}</label>
         </Inline>
         {meta.error && meta.touched && <Error>{meta.error}</Error>}
       </React.Fragment>
