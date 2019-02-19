@@ -223,7 +223,7 @@ class MainScreen extends React.Component {
           iconToUse: <FaCheckCircle color="green" size="80px" />,
           text1: `Поздравляем! Ваша ставка выиграла`,
           text2: `Сумма выигрыша по обновленному курсу`,
-          bet: NewAmountBTCReturnedAfterStockUpdate
+          bet: NewAmountBTCReturnedAfterStockUpdate - this.state.bet.betAmount
         }
       });
       this.props.changeUserBTC(
@@ -237,7 +237,9 @@ class MainScreen extends React.Component {
           iconToUse: <FaFrown color="red" size="80px" />,
           text1: `К сожалению ваша ставка проиграла`,
           text2: `Сумма проигрыша по обновленному курсу`,
-          bet: NewAmountBTCReturnedAfterStockUpdate
+          bet:
+            (this.state.bet.betAmount - NewAmountBTCReturnedAfterStockUpdate) *
+            -1
         }
       });
       this.props.changeUserBTC(
@@ -253,7 +255,7 @@ class MainScreen extends React.Component {
   onSubmitForm = props => this.submit(props);
 
   onSubmitForms = props => {
-    const currency = props.currency.label.props.children[2]
+    const currency = props.currency.label.props.children[2];
     this.setState({
       waitForResults: true,
       isFormDisabled: true,

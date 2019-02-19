@@ -13,8 +13,8 @@ const rotate360 = keyframes`
 export default styled.div`
   position: absolute;
   background-color: transparent;
-  left: calc(50%);
-  top: calc(50%) - 5em;
+  left: calc(50% - 5em);
+  top: calc(50% - 5em);
   width: 6em;
   height: 6em;
   border: 1em solid rgba(0, 0, 0, 0.2);
